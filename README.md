@@ -1,5 +1,3 @@
-# nck-demo
-Framework used to develop ludicrous demos for the pc entry competitions at demoscene parties, specially for last minute demomaking  panicking.
+# entropia
+Experimental realtime performance player &amp; editor
 
-## Dependencies
-Depends on nctoolkit, checkout both reps at the same folder and open the project files from nck-demo/project.
