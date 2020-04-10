@@ -1,0 +1,78 @@
+.tlTest {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 256px;
+    bottom: 0px;
+}
+
+.tlScenes{
+    border-left:1px solid #000;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width:256px;
+    background-color:#FFF;
+}
+
+.tlTopTitle{
+    width:100%;
+    background-color:#999;
+    height:24px;
+}
+
+.tlScenesList{
+    position:absolute;
+    top:24px;
+    bottom:0px;
+    width:100%;
+    overflow-y:auto;
+    overflow-x:none;
+    background-color:#CCC;
+}
+
+.tlSceneEntry{
+    border:1px solid #000;
+    margin:5px;
+    height:34px;
+    background-color: #DADADA;    
+    position:relative;
+    cursor:pointer;
+}
+
+
+.tlSceneEntry:hover{
+    background-color: #EEE;    
+}
+
+.tlSceneEntry .title{
+    position:absolute;
+    top:15px;
+    left:5px;
+    font-size:14px;
+}
+
+.tlSceneEntry .typeId{
+    position:absolute;
+    top:3px;
+    left:5px;
+    font-weight:bold;
+}
+
+.tlSceneEntry .delete{
+    position:absolute;
+    right:8px;
+    top:8px;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    border:1px solid #999;
+}
+
+.tlSceneEntry .delete:hover{
+    width:18px;
+    height:18px;
+    border:none;
+    background-color:#F00;
+}

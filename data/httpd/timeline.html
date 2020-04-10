@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>shōgun</title>
+        <script type="text/javascript" src="jquery-1.6.4.min.js"></script> 
+
+        <link rel="stylesheet" href="index.css" type="text/css">
+        <link rel="stylesheet" href="windows/timeline.css" type="text/css">
+        <link rel="stylesheet" href="windows/lib_timeline.css" type="text/css">
+   
+        <script src="windows/timeline.js" type="text/javascript" charset="utf-8"></script>
+        <script src="windows/lib_timeline.js" type="text/javascript" charset="utf-8"></script>
+        
+        <style type="text/css">
+            .timeline_full{
+                position:absolute;
+                padding:0;
+                margin:0;
+                left:0;
+                top:0;
+                right:0px;
+                bottom:0px;
+                overflow:hidden;
+            }
+        </style>
+    </head>
+    <body>
+      
+    <div class="wndWrapper timeline_full">
+      
+    </div>
+
+    <script type="text/javascript">
+        var timeline = null;
+        $(document).ready(function(){  
+            $(".wndWrapper.timeline_full").load("windows/timeline.html",function(){
+               timeline = new wndTimeline($(this));
+            });
+        })
+        
+        $(window).resize(function(){
+            if(timeline != null)
+                timeline.resize();
+        });
+    </script>
+
+</body>
+</html>

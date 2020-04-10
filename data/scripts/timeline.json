@@ -1,0 +1,42 @@
+{
+    "scenes":[
+        {
+            "type": "text",
+            "name": "txt_1",
+            
+            "x": 256,
+            "y": 256,
+            "text": "hello",
+            "font": "sans_serif"
+        },
+        {
+            "type": "color",
+            "name": "col_1",
+            
+            "texture": "quarteirao_artes.jpg",
+            "x": {
+                "type":"linear",
+                "nodes":[0,0,50,400]
+            },
+            "y": 100,
+            "width": 600,
+            "height": 256,
+            
+            "color": {"r":255.0,"g":255.0,"b":255.0}
+        }
+    ],
+    "timeline":[
+        {
+            "name": "col_1",
+            "start": 0,
+            "end": 120,
+            "track": 0
+        },
+        {
+            "name": "txt_1",
+            "start": 0,
+            "end": 120,
+            "track": 1
+        }
+    ]
+}

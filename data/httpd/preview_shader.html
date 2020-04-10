@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>shōgun</title>
+        <script type="text/javascript" src="jquery-1.6.4.min.js"></script> 
+
+        <link rel="stylesheet" href="index.css" type="text/css">
+        <script src="/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+
+        <link rel="stylesheet" href="windows/preview.css" type="text/css">
+        <link rel="stylesheet" href="windows/shaders.css" type="text/css">
+        <!--<link rel="stylesheet" href="windows/timeline.css" type="text/css">-->
+
+        <script src="windows/preview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="windows/shaders.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="windows/timeline.js" type="text/javascript" charset="utf-8"></script>-->
+    </head>
+    <body>
+        
+    <div class="wndWrapper preview">
+
+    </div>
+     
+    <!--
+    <div class="wndWrapper timeline">
+      
+    </div>
+    -->
+    
+    <div class="wndWrapper editor">
+      
+    </div>
+
+    <script type="text/javascript">
+        var shaders = null;
+        var preview = null;
+        var timeline = null;
+
+        $(document).ready(function(){  
+            $(".wndWrapper.preview").load("windows/preview.html",function(){
+                preview = new wndPreview($(this));
+            });
+
+            $(".wndWrapper.editor").load("windows/shaders.html",function(){
+               shaders = new wndShaders($(this));
+            });
+
+            //$(".wndWrapper.timeline").load("windows/timeline.html",function(){
+            //    timeline = new wndTimeline($(this));
+            //});
+
+            $(window).resize(function(){
+                if(preview)
+                    preview.resize();
+            })
+        });
+    </script>
+
+</body>
+</html>
