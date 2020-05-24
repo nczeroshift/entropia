@@ -1,9 +1,9 @@
 # Manual
 ## 1. About
-**Entropy** is an opensource compatible application for 3D graphics, audio and IO experimentation, mainly thought for the demoscene and "pc demo" category competitions, it can have other aplications for VJ or realtime/interactive art performances. 
+**Entropy** is an opensource application for 3D graphics, audio and IO experimentation, mainly thought for the demoscene and "pc demo" category competitions, it can have other aplications for VJ or realtime/interactive art performances. 
     
 ## 2. Requirements
-Device capable of running **OpenGL 2.0** / **OpenGLES 2.0** applications and audio output, running **Windows 10** / **Linux** / **MacOS X 10.9.5**.
+Device capable of running **OpenGL 2.0** / **OpenGL ES 2.0** applications and audio output, running **Windows 10** / **Linux** / **MacOS X 10.9.5**.
 
 ### 2.1. Development from binaries
 The minimum required tools to develop with Entropy are a text editor, [Blender](https://download.blender.org/release/Blender2.79/), image editor and optionaly, a web browser. 
