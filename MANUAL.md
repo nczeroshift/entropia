@@ -1,16 +1,16 @@
 # Manual
 ## 1. About
-**Entropy** is an opensource application for 3D graphics, audio and IO experimentation, mainly thought for the demoscene and "pc demo" category competitions, it can have other aplications for VJ or realtime/interactive art performances. 
+**Entropia** is an opensource application for 3D graphics, audio and IO experimentation, mainly thought for the demoscene and "pc demo" category competitions, it can have other aplications for VJ or realtime/interactive art performances. 
     
 ## 2. Requirements
 Device capable of running **OpenGL 2.0** / **OpenGL ES 2.0** applications and audio output, running **Windows 10** / **Linux** / **MacOS X 10.9.5**.
 
 ### 2.1. Development from binaries
-The minimum required tools to develop with Entropy are a text editor, [Blender](https://download.blender.org/release/Blender2.79/), image editor and optionaly, a web browser. 
+The minimum required tools to develop with Entropia are a text editor, [Blender](https://download.blender.org/release/Blender2.79/), image editor and optionaly, a web browser. 
 
 The text editor is used to edit the configuration files (**Plain Text**, [JSON](https://en.wikipedia.org/wiki/JSON)), shaders ([GLSL](https://www.khronos.org/opengles/sdk/docs/reference_cards/OpenGL-ES-2_0-Reference-card.pdf)) and timeline scripts (**JSON**).
 
-Content created with **Blender** can be exported with [bxon for Blender 2.79](https://github.com/nczeroshift/bxon-3d) and loaded to **Entropy**, the script supports exporting of model geometry, materials, textures, lamps, cameras, armatures and animations. 
+Content created with **Blender** can be exported with [bxon for Blender 2.79](https://github.com/nczeroshift/bxon-3d) and loaded to **Entropia**, the script supports exporting of model geometry, materials, textures, lamps, cameras, armatures and animations. 
 
 A web browser can be used as a real-time editing tool for shaders and timeline, open the browser at the url [http://localhost:8080](http://localhost:8080).
 
@@ -29,7 +29,7 @@ To compile from source, the required enviroment needs to be able to compile C++ 
 * **C** - Show/Hide UI
 * **X** - Reload resources (textures, models, shadders)
 * **Z** - Reload timeline script
-* **Escape** - Exit Entropy
+* **Escape** - Exit Entropia
 
 ## 5. Folder structure
 The aplication folder structure has the following layout:
