@@ -11,8 +11,8 @@ _DS_BEGIN
 class dsMainWithTimeline : public dsMain
 {
 public:
-    dsMainWithTimeline(Core::Window * window);
-    virtual ~dsMainWithTimeline();
+	dsMainWithTimeline(Core::Window * window);
+	virtual ~dsMainWithTimeline();
     void LoadTimeline();
 private:
 	bool m_EnableMusic;

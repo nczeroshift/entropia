@@ -7,18 +7,27 @@
 #include "dsMainWithTimeline.h"
 
 #include "scenes/dsText2D.h"
-#include "scenes/dsColor2D.h"
+#include "scenes/dsPlane2D.h"
+#include "scenes/dsModel3D.h"
+#include "scenes/dsTextureCapture.h"
 
 static DS::Stage * instanceWithId(const std::string & type, DS::Data * data) {
 	if (type == "text")
 		return new dsText2D(data);
-	else if (type == "color")
-		return new dsColor2D(data);
+	else if (type == "plane")
+		return new dsPlane2D(data);
+	else if (type == "model")
+		return new dsModel3D(data);
+	else if (type == "capture")
+		return new dsTextureCapture(data);
 	return NULL;
 }
 
-
 _DS_BEGIN
+
+dsMainWithTimeline::dsMainWithTimeline(Core::Window * window) : dsMain(window) {
+
+}
 
 dsMainWithTimeline::~dsMainWithTimeline() {
 
@@ -57,6 +66,8 @@ void dsMainWithTimeline::LoadTimeline()
 				stage = m_InstancedStages.find(name)->second;
 			else {
 				stage = instanceWithId(type, data);
+				if (stage == NULL)
+					THROW_EXCEPTION("Scene \""+type+"\" type not found");
 				stage->Load();
 				m_InstancedStages.insert(std::pair<std::string, DS::Stage*>(name, stage));
 			}

@@ -1,26 +1,26 @@
-#include "dsSceneLoading.h"
+#include "dsLoading.h"
 
-dsSceneLoading::dsSceneLoading(DS::Data * data) : DS::Stage(data) {
-
-}
-
-dsSceneLoading::~dsSceneLoading() {
+dsLoading::dsLoading(DS::Data * data) : DS::Stage(data) {
 
 }
 
-void dsSceneLoading::Load() {
+dsLoading::~dsLoading() {
+
+}
+
+void dsLoading::Load() {
     logo = m_Data->LoadTexture("texture://tex2d_logo.png");
 }
 
-void dsSceneLoading::Render(DS::StageProxy * proxy, double start, double end, double time) {
+void dsLoading::Render(DS::StageProxy * proxy, double start, double end, double time) {
     Graph::Device * dev = m_Data->GetGraphicsDevice();
     Gui::ShapeRenderer * shp = m_Data->GetShapeRenderer();
 
-    const float aspect = m_Data->GetAspect();
-    const float width = m_Data->GetWidth();
-    const float height = m_Data->GetHeight();
+    const float aspect = m_Data->GetVirtualDisplayWidth() / (float)m_Data->GetVirtualDisplayHeight();
+    const float width = m_Data->GetVirtualDisplayWidth();
+    const float height = m_Data->GetVirtualDisplayHeight();
 	
-	dev->Viewport(0, 0, width, height);
+	m_Data->SetVirtualViewport();
 
     dev->ClearColor(0.0, 0.0, 0.0, 1.0);
     dev->Enable(Graph::STATE_BLEND);
@@ -50,7 +50,7 @@ void dsSceneLoading::Render(DS::StageProxy * proxy, double start, double end, do
   
     dev->MatrixMode(Graph::MATRIX_PROJECTION);
     dev->Identity();
-    dev->Ortho2D(m_Data->GetWidth(), m_Data->GetHeight());
+    dev->Ortho2D(width, height);
 
     dev->MatrixMode(Graph::MATRIX_VIEW);
     dev->Identity();

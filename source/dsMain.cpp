@@ -28,6 +28,8 @@ dsMain::dsMain(Core::Window * window) : Threadable() {
     frTime = Core::CreateChronometer();
     shpRender = NULL;
     server = NULL;
+	m_VirtualWidth = VIRTUAL_DISPLAY_WIDTH;
+	m_VirtualHeight = VIRTUAL_DISPLAY_HEIGHT;
 
 	m_AudioEnable = false;
 	m_AudioSampleRate = AUDIO_SAMPLERATE;
@@ -39,6 +41,7 @@ dsMain::dsMain(Core::Window * window) : Threadable() {
         reloadCompoundCounter[i] = 0;
         reloadShaderFlag[i] = 0;
     }
+
     reloadResources = false;
     reloadTimeline = false;
 }
@@ -70,6 +73,8 @@ void dsMain::Run() {
         RenderLoading(wnd, dev); 
 
         data = new Data(wnd, dev);
+		data->SetupVirtualDisplay(m_VirtualWidth, m_VirtualHeight);
+
         shpRender = data->GetShapeRenderer();
 
         fontTexture = data->LoadTexture(DS_FONT_TEXTURE);
@@ -79,7 +84,7 @@ void dsMain::Run() {
         iconShader = data->LoadTexture("texture://ui/iconShader.png");
         iconCompound = data->LoadTexture("texture://ui/iconCompound.png");
 
-        loading = new dsSceneLoading(data);
+        loading = new dsLoading(data);
         loading->Load();
 
         // Load demo music.
@@ -196,6 +201,8 @@ void dsMain::Run() {
         ListFor(Math::TimelineItem<DS::StageProxy*>, items, i) {
             i->GetObject()->Update(i->GetObject(), i->GetStart(), i->GetEnd(), time);
         }
+
+		data->SetVirtualViewport();
 
         ListFor(Math::TimelineItem<DS::StageProxy*>, items, i) {
             i->GetObject()->RenderFBO(i->GetObject(), i->GetStart(), i->GetEnd(), time);
@@ -431,9 +438,11 @@ void dsMain::DrawFPS(float x, float y, float width, float height) {
 
 void dsMain::PlayPauseToggle() {
     if (mutePlayback) {
+		int64_t tmp = lastTime + timer->GetElapsedTime();
         if (timer->IsRunning()) {
             timer->Stop();
-            lastTime = timer->GetElapsedTime();
+			timer->Clear();
+            lastTime = tmp;
         }
         else
             timer->Start();
@@ -547,7 +556,7 @@ void dsMain::LoadAudio() {
 	mutePlayback = true;
 }
 
-void dsMain::SetAudioSettings(int audioSampleRate, int audioFFTSize, const std::string & audioStream) {
+void dsMain::SetupAudioSettings(int audioSampleRate, int audioFFTSize, const std::string & audioStream) {
 	m_AudioEnable = true;
 	m_AudioSampleRate = audioSampleRate;
 	m_AudioFTTSize = audioFFTSize;
@@ -571,7 +580,7 @@ JSONValue * ReadFileAsJSON(const std::string & fileName) {
 	SafeDelete(reader);
 
 	if (obj == NULL)
-		THROW_EXCEPTION("Invalid JSON");
+		THROW_EXCEPTION("Invalid JSON in \"" + fileName + "\"");
 
 	const JSONObject & root = obj->AsObject();
 

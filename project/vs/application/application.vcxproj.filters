@@ -70,16 +70,25 @@
     <ClInclude Include="..\..\..\source\dsMainWithTimeline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\scenes\dsColor2D.h">
-      <Filter>Source Files\scenes</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\source\scenes\dsItem2D.h">
       <Filter>Source Files\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\scenes\dsSceneLoading.h">
+    <ClInclude Include="..\..\..\source\scenes\dsText2D.h">
       <Filter>Source Files\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\source\scenes\dsText2D.h">
+    <ClInclude Include="..\..\..\source\scenes\dsItem3D.h">
+      <Filter>Source Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\scenes\dsPlane2D.h">
+      <Filter>Source Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\scenes\dsModel3D.h">
+      <Filter>Source Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\scenes\dsLoading.h">
+      <Filter>Source Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\scenes\dsTextureCapture.h">
       <Filter>Source Files\scenes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -120,16 +129,25 @@
     <ClCompile Include="..\..\..\source\dsMainWithTimeline.cpp">
       <Filter>Source Files\app</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\scenes\dsColor2D.cpp">
-      <Filter>Source Files\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\scenes\dsItem2D.cpp">
       <Filter>Source Files\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\scenes\dsSceneLoading.cpp">
+    <ClCompile Include="..\..\..\source\scenes\dsText2D.cpp">
       <Filter>Source Files\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\scenes\dsText2D.cpp">
+    <ClCompile Include="..\..\..\source\scenes\dsItem3D.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scenes\dsPlane2D.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scenes\dsModel3D.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scenes\dsLoading.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scenes\dsTextureCapture.cpp">
       <Filter>Source Files\scenes</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,7 +11,7 @@
 #include "dsAudioPlayer.h"
 #include "dsStage.h"
 #include "tinyxml.h"
-#include "dsSceneLoading.h"
+#include "scenes/dsLoading.h"
 #include "dsServer.h"
 
 _DS_BEGIN
@@ -28,7 +28,7 @@ public:
 
 	virtual void LoadTimeline() {};
 
-	virtual void LoadAudio() {};
+	void LoadAudio();
 
 	virtual double GetMaxDuration() { return m_MaxDuration; }
 
@@ -69,7 +69,9 @@ public:
 
 	void SetMaxDuration(double value) { m_MaxDuration = value; }
 
-	void SetAudioSettings(int audioSampleRate,int audioFFTSize, const std::string & audioStream);
+	void SetupAudioSettings(int audioSampleRate,int audioFFTSize, const std::string & audioStream);
+
+	void SetupVirtualDisplay(int width, int height) { m_VirtualWidth = width; m_VirtualHeight = height; }
 protected:
     int reloadTextureCounter[3];
     int reloadCompoundCounter[3];
@@ -78,10 +80,12 @@ protected:
     bool reloadTimeline;
     bool reloadResources;
 
-	bool m_AudioEnable;
+	int			m_VirtualWidth, m_VirtualHeight;
+
+	bool		m_AudioEnable;
 	std::string m_AudioStreamFilename;
-	int m_AudioSampleRate;
-	int m_AudioFTTSize;
+	int			m_AudioSampleRate;
+	int			m_AudioFTTSize;
 
     bool showUI;
     Data * data;
@@ -101,7 +105,7 @@ protected:
     Gui::FontMap    * fontMap, * fontTimeMap;           // Mapa de caracteres da font
     Graph::Device   * dev;          // Dispositivo de gráfico
     Core::Window    * wnd;
-    dsSceneLoading * loading;
+    dsLoading * loading;
     Server * server;
 	Graph::Texture * iconTexture;
 	Graph::Texture * iconCompound;

@@ -32,8 +32,8 @@ Data::Data(Core::Window * wnd, Graph::Device * gDev) {
 
 	accessMutex = Core::CreateMutex();
 
-	m_ScreenWidth = window->GetWidth();
-	m_ScreenHeight = window->GetHeight();
+	m_VirtualDisplayWidth = VIRTUAL_DISPLAY_WIDTH;
+	m_VirtualDisplayHeight = VIRTUAL_DISPLAY_HEIGHT;
 }
 
 Data::~Data() {
@@ -201,6 +201,11 @@ Graph::Program * Data::GetProgram(const std::string & filename) {
     return NULL;
 }
 
+void Data::SetTexture(const std::string & filename, Graph::Texture * texture) {
+	if (m_Textures.find(filename) == m_Textures.end()) {
+		m_Textures.insert(std::pair<std::string, Graph::Texture*>(filename, texture));
+	}
+}
 
 float Data::GetAspect() {
     return window->GetWidth() / (float)window->GetHeight();
@@ -235,15 +240,50 @@ void Data::GetCompoundsKeys(std::vector<std::string> * names) {
     }
 }
 
-/*
-void Data::LoadTimeline(Math::TimelineNode<DS::Stage*> * timeline) {
-    std::string timelineSrc = "script://timeline.cpp";
-    if (Core::FileReader::Exists(timelineSrc)) {
-        std::string fullPath = Core::ResolveFilename(timelineSrc);
-        sceneTimeline.LoadFile(timelineSrc.c_str());
-        lastTimelineChange = Core::GetFileLastModified(timelineSrc);
-    }
+int Data::GetVirtualDisplayWidth() { 
+	return m_VirtualDisplayWidth; 
 }
-*/
+
+int Data::GetVirtualDisplayHeight() { 
+	return m_VirtualDisplayHeight; 
+}
+
+void Data::SetupVirtualDisplay(int width, int height) {
+	m_VirtualDisplayWidth = width; 
+	m_VirtualDisplayHeight = height; 
+}
+
+void Data::SetVirtualViewport() {
+	float aspect = GetVirtualDisplayWidth() / (float)GetVirtualDisplayHeight();
+	float tmpWidth, tmpHeight, tmpX, tmpY;
+	if (aspect > 1) {
+		tmpWidth = window->GetWidth();
+		tmpHeight = tmpWidth / aspect;
+		tmpX = 0;
+		tmpY = (window->GetHeight() - tmpHeight) / 2.0;
+	}
+	else {
+		tmpHeight = window->GetHeight();
+		tmpWidth = tmpHeight * aspect;
+		tmpX = (window->GetWidth() - tmpWidth) / 2.0;
+		tmpY = 0;
+	}
+
+	gDevice->Viewport(tmpX, tmpY, tmpWidth, tmpHeight);
+}
+
+Math::Vec2 Data::GetVirtualViewportDimensions() {
+	float aspect = GetVirtualDisplayWidth() / (float)GetVirtualDisplayHeight();
+	float tmpWidth, tmpHeight, tmpX, tmpY;
+	if (aspect > 1) {
+		tmpWidth = window->GetWidth();
+		tmpHeight = tmpWidth / aspect;
+	}
+	else {
+		tmpHeight = window->GetHeight();
+		tmpWidth = tmpHeight * aspect;
+	}
+	return Math::Vec2((int)tmpWidth, (int)tmpHeight);
+}
 
 _DS_END

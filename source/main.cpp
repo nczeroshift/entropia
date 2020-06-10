@@ -6,18 +6,24 @@
 
 #include "dsMainWithTimeline.h"
 
-
 void Core::Application_Main(const std::vector<std::string> & CmdLine)
 {
 	// Where settings are stored, optional.
 	const std::string fileName = "script://config.json";
 
 	// Initialization variables.
-	std::string windowTitle = "Entropy";
+	std::string windowTitle = "Entropia";
 	bool fullScreen = false;
 	bool showConfig = false;
-    int width = 1920 * 0.6, height = 1080 * 0.6;
-	int virtualWidth = 1920, virtualHeight = 1080;
+	
+	// Window & Rendering size.
+	int width = VIRTUAL_DISPLAY_WIDTH * 0.6;
+	int height = VIRTUAL_DISPLAY_HEIGHT * 0.6;
+	
+	// Coordinates space dimensions, mostly for 2D elements.
+	int virtualWidth = VIRTUAL_DISPLAY_WIDTH;
+	int virtualHeight = VIRTUAL_DISPLAY_HEIGHT;
+
 	bool audioEnable = false;
 	std::string audioStream = "";
 	int audioSampleRate = AUDIO_SAMPLERATE;
@@ -32,10 +38,9 @@ void Core::Application_Main(const std::vector<std::string> & CmdLine)
 		if (root.find("showConfig") != root.end())
 			showConfig = root.find("showConfig")->second->AsBool();
 
-		if (root.find("maxDuration") != root.end()) {
+		if (root.find("maxDuration") != root.end())
 			maxDuration = root.find("maxDuration")->second->AsNumber();
-		}
-
+		
 		if (root.find("fullScreen") != root.end())
 			fullScreen = root.find("fullScreen")->second->AsBool();
 
@@ -81,35 +86,33 @@ void Core::Application_Main(const std::vector<std::string> & CmdLine)
 		runDemo = conf->Run(&width, &height, &fullScreen);
 		SafeDelete(conf);
 	}
-
+	
     if (runDemo) 
     {
         Core::Window * wnd = Core::CreateWindow(windowTitle, width, height, fullScreen);
 
-        DS::dsMain * grThread = new DS::dsMainWithTimeline(wnd);
+        DS::dsMain * demo = new DS::dsMainWithTimeline(wnd);
 
-		grThread->SetMaxDuration(maxDuration);
-		grThread->GetData()->SetScreenWidth(virtualWidth);
-		grThread->GetData()->SetScreenHeight(virtualHeight);
+		demo->SetMaxDuration(maxDuration);
+		demo->SetupVirtualDisplay(virtualWidth, virtualHeight);
 
-		if (audioEnable) {
-			grThread->SetAudioSettings(audioSampleRate, audioFFTSize, audioStream);
-		}
+		if (audioEnable) 
+			demo->SetupAudioSettings(audioSampleRate, audioFFTSize, audioStream);
 
-        grThread->Start();
+		demo->Start();
         while (wnd->Peek(true)) 
         {
             if(fullScreen)
                 wnd->SetCursorVisiblity(false);
 
-            if (!grThread->IsRunning())
+            if (!demo->IsRunning())
                 break;
             
-            grThread->UpdateWndInput();
+			demo->UpdateWndInput();
         }
-        grThread->TearDownAndJoin();
+		demo->TearDownAndJoin();
 
-        SafeDelete(grThread);
+        SafeDelete(demo);
         SafeDelete(wnd);
     }
 }

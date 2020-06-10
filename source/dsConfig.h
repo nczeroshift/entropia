@@ -42,12 +42,18 @@
 #define REFERENCE_SUBTITLE_SIZE  (REFERENCE_HEIGHT/12)
 #define REFERENCE_DURATION 30e6 // 30s
 
+// UI Font resources
 #define DS_FONT_TEXTURE "texture://tex2d_sans_serif.png"
 #define DS_FONT_MAP "script://fmap_sans_serif.txt"
 
+// These constants set the default audio output device settings.
 #define AUDIO_SAMPLERATE    44100
 #define AUDIO_BUFFERS       4
 #define AUDIO_FFT           2048
+
+// These constants set the default screen coordinates dimension space for 2D objects.
+#define VIRTUAL_DISPLAY_WIDTH	1920
+#define VIRTUAL_DISPLAY_HEIGHT	1080
 
 #define _DS_BEGIN namespace DS{
 #define _DS_END }

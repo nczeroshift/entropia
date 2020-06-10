@@ -1,14 +1,27 @@
+function convertSecondsToTimeString(time){
+    var minutes = Math.floor(time / 60.0);
+    var secs = time - minutes * 60;
+    var seconds = Math.floor(secs);
+    var mili = Math.floor(1000 * (secs - seconds))
+    function pad(val){
+        if(val < 10)
+            return "0"+val;
+        return ""+val;
+    }
+    return pad(minutes) + ":" + pad(seconds) + ":" + pad(mili);
+}
+
 function wndTimeline(wnd){
     this._pWindow = wnd;
     this._pTimeline = new Timeline(this._pWindow.find(".tl"));
 
-    /*this._pTimeline.addSegment("a1", 1, 2, 1, "1");
-    this._pTimeline.addSegment("a2", 2, 2, 2, "2");
-    this._pTimeline.addSegment("a3", 3, 2, 3, "3");
-    this._pTimeline.addSegment("a4", 4, 2, 4, "4");*/
-
     this._pTimeline.setChangeCallback(function (id, t, dur, track) {
         console.log(id, t, dur, track);
+    });
+    
+    this._pTimeline.setTimeChangeCallback(function(start, duration){
+        $(".tlFromTxt").val(convertSecondsToTimeString(start));
+        $(".tlToTxt").val(convertSecondsToTimeString(start+duration));
     });
     
     this._pFetchTimeline();

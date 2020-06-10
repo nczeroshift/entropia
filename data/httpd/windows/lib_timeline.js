@@ -6,6 +6,11 @@ function Timeline(dom) {
     this._pWidth = 0;
     this._pSetup();
     this._pChangeCallback = null;
+    this._pTimeChangeCallback = null;
+}
+
+Timeline.prototype.setTimeChangeCallback = function (cbk) {
+    this._pTimeChangeCallback = cbk;
 }
 
 Timeline.prototype.setChangeCallback = function (cbk) {
@@ -98,6 +103,8 @@ Timeline.prototype._pSetup = function () {
             var w = self.width();
             var pixelsPerSecond = w / scope._pDuration;
             scope._pStart = parseFloat(self.attr("data-o_start")) - d_x / pixelsPerSecond;
+            if(scope._pTimeChangeCallback)
+                scope._pTimeChangeCallback(scope._pStart, scope._pDuration);
             $(window).trigger("resize");
         }
     });

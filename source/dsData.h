@@ -57,24 +57,25 @@ public:
     Compound * GetCompound(const std::string & filename);
     Gui::FontMap * GetFontMap(const std::string & filename);
       
+	void SetTexture(const std::string & filename, Graph::Texture * texture);
+
     float GetAspect();
     float GetHeight();
     float GetWidth();
 
-	float GetScreenWidth();
-	float GetScreenHeight();
-
-	void SetScreenWidth(float value) { m_ScreenWidth = value; }
-	void SetScreenHeight(float value) { m_ScreenHeight = value; }
+	int GetVirtualDisplayWidth();
+	int GetVirtualDisplayHeight();
+	void SetupVirtualDisplay(int width, int height);
 
 	void GetShaderErrors(std::list<std::string>  * errors);
-    //void LoadTimeline();
 
 	void LockAccess();
 	void UnlockAccess();
 
+	void SetVirtualViewport();
+	Math::Vec2 GetVirtualViewportDimensions();
 private:
-	float m_ScreenWidth, m_ScreenHeight;
+	float m_VirtualDisplayWidth, m_VirtualDisplayHeight;
 	Core::Mutex * accessMutex;
 	std::list<std::string> shadersErrors;
     int64_t lastTimelineChange;

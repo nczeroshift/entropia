@@ -20,11 +20,12 @@
     width:100%;
     background-color:#999;
     height:24px;
+    border-bottom: 1px solid #686868;
 }
 
 .tlScenesList{
     position:absolute;
-    top:24px;
+    top:25px;
     bottom:0px;
     width:100%;
     overflow-y:auto;

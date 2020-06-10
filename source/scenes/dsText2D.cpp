@@ -29,6 +29,11 @@ void dsText2D::Parse(const JSONObject & node) {
 		m_Text = node.find("text")->second->AsString();
 	}
 
+	if (node.find("size") != node.end()) {
+		m_FontSize.Parse(*node.find("size")->second);
+	}
+
+
 	if (node.find("color") != node.end()) {
 		const JSONObject & colorNode = node.find("color")->second->AsObject();
 		if (colorNode.find("r") != colorNode.end())

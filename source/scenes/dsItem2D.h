@@ -16,7 +16,9 @@ protected:
 	DS::StageValue m_X, m_Y;
 	DS::StageValue m_Width, m_Height;
 	DS::StageValue m_Alpha;
+	DS::StageValue m_ScaleX, m_ScaleY;
 
+	float m_CurrentScaleX, m_CurrentScaleY;
 	float m_CurrentX, m_CurrentY;
 	float m_CurrentWidth, m_CurrentHeight;
 	float m_CurrentAlpha;
